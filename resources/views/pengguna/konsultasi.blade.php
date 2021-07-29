@@ -22,9 +22,9 @@
 				</div>
 				<div class="row">
 
-					<form action="/konsultasi/hitung" method="post">
-						@csrf
-						<div class="col-md-12">
+					<div class="col-md-12">
+							<form action="/konsultasi/hitung" method="post">
+								@csrf
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
@@ -51,37 +51,37 @@
 											{{ session('gagal') }}
 										</div>
 									@endif
-									<div class="table-responsive">
-										<table id="add-row" class="display table table-striped table-hover" >
-											<thead>
+								</div>
+								<div class="table-responsive">
+									<table id="add-row" class="display table table-striped table-hover" >
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Id Gejala</th>
+												<th>Gejala</th>
+												<th style="width: 10%">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											@php
+												$i = 0;
+											@endphp
+											@foreach ($gejala as $g)								
 												<tr>
-													<th>No</th>
-													<th>Id Gejala</th>
-													<th>Gejala</th>
-													<th style="width: 10%">Action</th>
+													<td>{{++$i}}</td>
+													<td>{{$g->id_gejala}}</td>
+													<td>{{$g->nama_gejala}}</td>
+													<td class="text-center ">
+														<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="{{$g->id_gejala}}" name="id_gejala[]">
+													</td>
 												</tr>
-											</thead>
-											<tbody>
-												@php
-													$i = 0;
-												@endphp
-												@foreach ($gejala as $g)								
-													<tr>
-														<td>{{++$i}}</td>
-														<td>{{$g->id_gejala}}</td>
-														<td>{{$g->nama_gejala}}</td>
-														<td class="text-center ">
-															<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="{{$g->id_gejala}}" name="id_gejala[]">
-														</td>
-													</tr>
-												@endforeach
-											</tbody>
-										</table>
-									</div>
+											@endforeach
+										</tbody>
+									</table>
 								</div>
 							</div>
+						</form>
 						</div>
-					</form>
 				</div>
 			</div>
 		</div>
