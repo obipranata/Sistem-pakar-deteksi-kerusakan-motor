@@ -3,17 +3,16 @@
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('home');
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/', 'HomeController@index');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/', 'HomeController@index');
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
 
-Route::middleware(['admin'])->group(function(){
+Route::middleware(['admin'])->group(function () {
     Route::post('/jenismotorupdate', 'admin\JenisMotorController@update');
     Route::post('/gejalaupdate', 'admin\GejalaController@update');
     Route::get('/dashboard', 'admin\HomeController@index');
@@ -33,7 +32,7 @@ Route::middleware(['admin'])->group(function(){
     Route::resource('detailkasuslama', 'admin\DetailKasusLamaController');
 });
 
-Route::middleware(['user'])->group(function(){
+Route::middleware(['user'])->group(function () {
     Route::post('/konsultasi/hitung', 'pengguna\KonsultasiController@hitung');
     Route::post('/riwayat/download', 'pengguna\RiwayatKonsultasiController@download');
     Route::delete('/delete/riwayat/{kd_konsultasi}', 'pengguna\RiwayatKonsultasiController@delete');
@@ -42,4 +41,3 @@ Route::middleware(['user'])->group(function(){
     Route::resource('konsultasi', 'pengguna\KonsultasiController');
     Route::resource('riwayatkonsultasi', 'pengguna\RiwayatKonsultasiController');
 });
-
